@@ -1,5 +1,17 @@
 <?php
-// retorno do formulario quando o navegador esta sem JavaScript
+/* =====================================================================
+   ObraLog — login.php
+   O formulario nao escolhe o destino: quem decide e o api/entrar.php,
+   lendo o tipo_usuario do banco.
+   ===================================================================== */
+require_once __DIR__ . '/includes/sessao.php';
+
+/* ja esta logado? vai direto para a area dele */
+if ($u = usuarioLogado()) {
+    header('Location: ' . ($u['tipo'] === 'loja' ? 'cadastrar-entrega.php' : 'entregas.php'));
+    exit;
+}
+
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
 ?>
@@ -80,7 +92,7 @@ unset($_SESSION['flash']);
                     Acesso restrito
                 </span>
                 <h2>Entrar na conta</h2>
-                <p>Use o e-mail cadastrado para acessar o painel.</p>
+                <p>Lojas e motoristas usam o mesmo acesso — o painel abre conforme o seu cadastro.</p>
             </header>
 
             <div class="aviso erro <?= $flash ? 'visivel' : '' ?>" id="aviso" role="alert">
@@ -128,7 +140,8 @@ unset($_SESSION['flash']);
 
                 <div class="linha-opcoes">
                     <label class="checkbox">
-                        <input type="checkbox" name="lembrar" value="1">
+                        <input type="checkbox" name="lembrar" value="1"
+                               <?= !empty($flash['dados']['lembrar']) ? 'checked' : '' ?>>
                         <span class="marca">
                             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="m20 6-11 11-5-5"/>

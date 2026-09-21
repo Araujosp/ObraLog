@@ -8,7 +8,6 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once __DIR__ . '/crud.php';
 
 /** Retorna true se existe usuario logado na sessao. */
 function estaLogado(): bool

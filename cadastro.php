@@ -2,7 +2,7 @@
 require_once __DIR__ . '/includes/auth.php';
 
 if (estaLogado()) {
-    header('Location: dashboard.php');
+    header('Location: entregas.php');
     exit;
 }
 
@@ -106,7 +106,7 @@ $estados = ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA
                 <span id="aviso-texto"><?= $flash ? e($flash['mensagem']) : '' ?></span>
             </div>
 
-            <form class="formulario" id="form-cadastro" action="api/cadastrar.php" method="post" novalidate>
+            <form class="formulario" id="form-cadastro" action="cadastro.php" method="post" novalidate>
 
                 <!-- ---------- ETAPA 1: tipo + dados de acesso ---------- -->
                 <div class="etapa ativa" data-etapa="1">

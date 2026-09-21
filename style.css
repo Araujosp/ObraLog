@@ -589,3 +589,152 @@ body::after {
         transition-duration: .01ms;
     }
 }
+
+/* Pagina entregas
+-
+-
+-
+-
+--
+-
+-
+-
+-
+-
+-
+-
+-
+-
+*/
+
+/* =====================================================================
+   ObraLog - LISTA DE ENTREGAS
+   Cole este bloco no final do seu CSS atual. Usa as mesmas variaveis
+   (--laranja, --superficie, --borda, --raio) ja definidas no :root.
+   ===================================================================== */
+
+.conteudo-largo { max-width: 1240px; }
+
+/* ---------- cabecalho da pagina ---------- */
+.cabecalho-pagina {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 24px; flex-wrap: wrap;
+    margin-bottom: 26px;
+}
+.cabecalho-pagina h1 { margin-bottom: 6px; }
+.cabecalho-pagina p { color: var(--texto-medio); font-size: .92rem; }
+.busca { width: min(320px, 100%); }
+.busca .entrada input { padding-left: 0; font-size: .9rem; }
+
+/* ---------- moldura da tabela ---------- */
+.quadro-tabela {
+    position: relative; z-index: 1;
+    background: var(--superficie);
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
+    overflow: hidden;
+}
+
+.tabela { width: 100%; border-collapse: collapse; }
+
+.tabela thead th {
+    padding: 14px 20px;
+    text-align: left;
+    background: var(--fundo-2);
+    border-bottom: 1px solid var(--borda);
+    color: var(--laranja);
+    font-size: .72rem; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.tabela tbody td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--borda-suave);
+    color: var(--texto-medio);
+    font-size: .9rem;
+    vertical-align: middle;
+}
+.tabela tbody tr:last-child td { border-bottom: none; }
+.tabela tbody tr { transition: background var(--transicao); }
+.tabela tbody tr:hover { background: rgba(255, 107, 0, .045); }
+
+.alinha-direita { text-align: right; }
+
+/* ---------- celulas especiais ---------- */
+.codigo {
+    display: inline-block; padding: 4px 10px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .04);
+    border: 1px solid var(--borda);
+    color: var(--texto-fraco);
+    font-size: .8rem; font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+.destaque { color: var(--texto); font-weight: 600; }
+.valor {
+    color: var(--texto); font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+/* ---------- acoes da linha ---------- */
+.acoes { display: inline-flex; align-items: center; gap: 8px; justify-content: flex-end; }
+.acoes form { display: contents; }
+
+.acao {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 9px 14px;
+    border: 1px solid var(--borda); border-radius: 10px;
+    background: var(--superficie-2);
+    color: var(--texto-medio);
+    font-family: inherit; font-size: .82rem; font-weight: 600;
+    text-decoration: none; white-space: nowrap; cursor: pointer;
+    transition: var(--transicao);
+}
+.acao:hover { border-color: #3a3a4d; color: var(--texto); }
+.acao:focus-visible { outline: none; box-shadow: var(--brilho); }
+
+.acao.aceitar {
+    background: rgba(255, 107, 0, .1);
+    border-color: rgba(255, 107, 0, .35);
+    color: var(--laranja);
+}
+.acao.aceitar:hover {
+    background: var(--laranja); border-color: var(--laranja); color: #16100a;
+}
+
+/* ---------- lista vazia ---------- */
+.sem-registros {
+    display: grid; gap: 6px; justify-items: center; text-align: center;
+    padding: 54px 20px;
+}
+.sem-registros strong { color: var(--texto); font-size: 1rem; }
+.sem-registros span { color: var(--texto-fraco); font-size: .88rem; }
+
+/* ---------- responsivo: vira cartoes ---------- */
+@media (max-width: 860px) {
+    .quadro-tabela { background: none; border: none; border-radius: 0; overflow: visible; }
+    .tabela thead { display: none; }
+    .tabela, .tabela tbody, .tabela tr, .tabela td { display: block; width: 100%; }
+
+    .tabela tbody tr {
+        margin-bottom: 14px; padding: 6px 4px;
+        background: var(--superficie);
+        border: 1px solid var(--borda);
+        border-radius: var(--raio);
+    }
+    .tabela tbody td {
+        display: flex; align-items: center; justify-content: space-between;
+        gap: 16px; padding: 11px 16px;
+        text-align: left !important;
+    }
+    .tabela tbody td::before {
+        content: attr(data-rotulo);
+        color: var(--texto-fraco);
+        font-size: .74rem; font-weight: 700;
+        letter-spacing: .1em; text-transform: uppercase;
+    }
+    .acoes { width: 100%; justify-content: flex-end; }
+    .acao { flex: 1 1 auto; }
+}
