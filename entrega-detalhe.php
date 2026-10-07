@@ -74,12 +74,14 @@ function dataBr(?string $data): string
 
 <main class="conteudo conteudo-largo">
 
+    <?php $paginaAtual = $ehDoMotorista ? 'minhas' : 'disponiveis'; require __DIR__ . '/includes/menu-motorista.php'; ?>
+
     <div class="cabecalho-pagina">
         <div>
             <h1>Entrega <span>#<?= (int) $entrega['id_entrega'] ?></span></h1>
             <p>Confira os dados antes de aceitar a carga.</p>
         </div>
-        <a href="entregas.php" class="acao">&larr; Voltar para a lista</a>
+        <a href="<?= $ehDoMotorista ? 'minhas-entregas.php' : 'entregas.php' ?>" class="acao">&larr; Voltar para a lista</a>
     </div>
 
     <div class="grade-cartoes">
@@ -128,8 +130,12 @@ function dataBr(?string $data): string
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/>
             </svg>
             <span>
-                Você já aceitou essa entrega em <?= dataBr($entrega['data_entrega']) ?>.
-                <a href="relatorio.php?id=<?= (int) $entrega['id_entrega'] ?>" class="link">Ver PDF novamente</a>
+                <?php if ($entrega['data_finalizacao']): ?>
+                    Esta entrega foi finalizada em <?= dataBr($entrega['data_finalizacao']) ?>.
+                <?php else: ?>
+                    Você aceitou essa entrega em <?= dataBr($entrega['data_entrega']) ?> e ela está em andamento.
+                <?php endif; ?>
+                <a href="relatorio.php?id=<?= (int) $entrega['id_entrega'] ?>" class="link">Ver PDF</a>
             </span>
         </div>
     <?php endif; ?>

@@ -22,7 +22,8 @@ $sql = "SELECT  en.id_entrega,
         FROM    entrega en
         JOIN    loja    l ON l.id_usuario = en.id_loja
         JOIN    usuario u ON u.id_usuario = en.id_loja
-        WHERE   en.id_motorista IS NULL";
+        WHERE   en.id_motorista IS NULL
+          AND   en.data_finalizacao IS NULL";
 
 $parametros = [];
 
@@ -74,6 +75,8 @@ function dataBr(?string $data): string
 <!-- =================== CONTEÚDO =================== -->
 <main class="conteudo conteudo-largo">
 
+    <?php $paginaAtual = 'disponiveis'; require __DIR__ . '/includes/menu-motorista.php'; ?>
+
     <div class="cabecalho-pagina">
         <div>
             <h1>Entregas <span>disponíveis</span></h1>
@@ -94,7 +97,7 @@ function dataBr(?string $data): string
     </div>
 
     <?php if ($flash): ?>
-        <div class="aviso erro visivel" role="alert" style="margin-bottom:20px">
+        <div class="aviso <?= ($flash['tipo'] ?? 'erro') === 'sucesso' ? 'sucesso' : 'erro' ?> visivel" role="alert" style="margin-bottom:20px">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/>
             </svg>

@@ -780,3 +780,42 @@ body::after {
     .acoes { width: 100%; justify-content: flex-end; }
     .acao { flex: 1 1 auto; }
 }
+
+
+/* =====================================================================
+   MENU DO MOTORISTA (Entregas disponiveis | Minhas Entregas)
+   ===================================================================== */
+.menu-motorista { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 26px; }
+.menu-motorista a {
+    padding: 10px 18px;
+    border: 1px solid var(--borda); border-radius: var(--raio-sm);
+    background: var(--superficie-2); color: var(--texto-medio);
+    font-size: .88rem; font-weight: 600; text-decoration: none;
+    transition: var(--transicao);
+}
+.menu-motorista a:hover { border-color: #3a3a4d; color: var(--texto); }
+.menu-motorista a.ativo {
+    background: rgba(255, 107, 0, .1);
+    border-color: rgba(255, 107, 0, .35);
+    color: var(--laranja);
+}
+
+.acao.finalizar {
+    background: rgba(46, 224, 138, .1);
+    border-color: rgba(46, 224, 138, .35);
+    color: var(--sucesso);
+}
+.acao.finalizar:hover {
+    background: var(--sucesso); border-color: var(--sucesso); color: #06130c;
+}
+
+
+/* Estado da entrega aceita pelo motorista */
+.status-entrega {
+    display: inline-flex; align-items: center;
+    padding: 6px 10px; border-radius: 999px;
+    background: rgba(255, 107, 0, .10);
+    border: 1px solid rgba(255, 107, 0, .28);
+    color: var(--laranja);
+    font-size: .78rem; font-weight: 700; white-space: nowrap;
+}

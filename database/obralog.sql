@@ -86,7 +86,8 @@ CREATE TABLE cliente (
 -- ENTREGA
 -- id_motorista comeca NULL (= disponivel). Quando um motorista aceita,
 -- gravamos o id_motorista e a data_entrega; isso substitui a
--- necessidade de uma coluna "status" separada.
+-- necessidade de uma coluna "status" separada. Quando o motorista
+-- finaliza a entrega, gravamos data_finalizacao (NULL = ainda ativa).
 -- ---------------------------------------------------------------------
 CREATE TABLE entrega (
     id_entrega          INT AUTO_INCREMENT PRIMARY KEY,
@@ -98,6 +99,7 @@ CREATE TABLE entrega (
     materiais           TEXT           NOT NULL,
     data_solicitacao    DATETIME       DEFAULT CURRENT_TIMESTAMP,
     data_entrega         DATETIME       NULL COMMENT 'preenchida quando o motorista aceita',
+    data_finalizacao     DATETIME       NULL COMMENT 'preenchida quando o motorista finaliza; NULL = ainda ativa',
     CONSTRAINT fk_entrega_loja FOREIGN KEY (id_loja)
         REFERENCES loja (id_usuario) ON DELETE CASCADE,
     CONSTRAINT fk_entrega_motorista FOREIGN KEY (id_motorista)
@@ -111,13 +113,15 @@ CREATE TABLE entrega (
 -- DADOS DE TESTE
 -- Senha de TODOS os usuarios abaixo: senha123
 -- (hash bcrypt gerado com password_hash($senha, PASSWORD_DEFAULT))
+-- Motorista de teste: teste.motorista@obralog.com / 123
 -- =====================================================================
 
 INSERT INTO usuario (id_usuario, nome, email, senha, tipo_usuario) VALUES
 (1, 'Depósito São Jorge',     'loja@obralog.com',      '$2y$10$2mDOthAbyelJDzbiKar2b.mwVxVdHDF8ro1F1ivTWHm9qDm9375gq', 'loja'),
 (2, 'Casa do Construtor ABC', 'lojaabc@obralog.com',   '$2y$10$2mDOthAbyelJDzbiKar2b.mwVxVdHDF8ro1F1ivTWHm9qDm9375gq', 'loja'),
 (3, 'João Martins',           'motorista@obralog.com', '$2y$10$2mDOthAbyelJDzbiKar2b.mwVxVdHDF8ro1F1ivTWHm9qDm9375gq', 'motorista'),
-(4, 'Carlos Souza',           'carlos@obralog.com',    '$2y$10$2mDOthAbyelJDzbiKar2b.mwVxVdHDF8ro1F1ivTWHm9qDm9375gq', 'motorista');
+(4, 'Carlos Souza',           'carlos@obralog.com',    '$2y$10$2mDOthAbyelJDzbiKar2b.mwVxVdHDF8ro1F1ivTWHm9qDm9375gq', 'motorista'),
+(5, 'Motorista Teste',        'teste.motorista@obralog.com', '$2y$10$i0NspgBVruIF0Lagi3GgROPZQXoux3IjRmcp3if2632f0Yr3mh8OW', 'motorista');
 
 INSERT INTO loja (id_usuario, cnpj, nome_fantasia, telefone, rua, numero, complemento, cep, cidade, estado) VALUES
 (1, '11222333000181', 'Depósito São Jorge',     '11988887777', 'Av. das Industrias',     '1200', 'Galpão 4', '13560000', 'São Carlos', 'SP'),
@@ -129,7 +133,8 @@ INSERT INTO veiculo (id_veiculo, placa, modelo, capacidade_carga) VALUES
 
 INSERT INTO motorista (id_usuario, cnh, telefone, id_veiculo) VALUES
 (3, '12345678900', '11966665555', 1),
-(4, '98765432100', '11955554444', 2);
+(4, '98765432100', '11955554444', 2),
+(5, '00000000005', '11999999999', NULL);
 
 INSERT INTO cliente (id_cliente, nome, cpf, telefone, endereco) VALUES
 (1, 'Marcos Silva',        '52998224725', '11933332222', 'Rua das Palmeiras, 88 - São Carlos/SP'),

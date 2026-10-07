@@ -20,8 +20,8 @@ $idEntrega = (int) ($_POST['id_entrega'] ?? 0);
 
 $stmt = $pdo->prepare(
     'UPDATE entrega
-        SET id_motorista = ?, data_entrega = NOW()
-      WHERE id_entrega = ? AND id_motorista IS NULL'
+        SET id_motorista = ?, data_entrega = NOW(), data_finalizacao = NULL
+      WHERE id_entrega = ? AND id_motorista IS NULL AND data_finalizacao IS NULL'
 );
 $stmt->execute([$usuario['id_usuario'], $idEntrega]);
 
@@ -31,6 +31,10 @@ if ($stmt->rowCount() === 0) {
     exit;
 }
 
-// aceite confirmado: manda direto para o PDF da entrega
-header('Location: relatorio.php?id=' . $idEntrega);
+// aceite confirmado: vai para "Minhas entregas" com a mensagem de sucesso
+$_SESSION['flash'] = [
+    'tipo'     => 'sucesso',
+    'mensagem' => 'Entrega aceita com sucesso. Quando terminar a entrega, acesse Minhas Entregas e clique em Finalizar.',
+];
+header('Location: minhas-entregas.php');
 exit;

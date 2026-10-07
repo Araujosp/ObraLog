@@ -1,0 +1,14 @@
+OBRALOG - MINHAS ENTREGAS
+
+O que foi ajustado:
+- Ao aceitar uma carga, ela sai de "Entregas disponíveis" e vai para "Minhas Entregas".
+- O PDF continua disponível pelo botão "PDF" dentro de "Minhas Entregas".
+- Cada motorista vê somente as próprias entregas aceitas.
+- O botão "Finalizar entrega" registra a finalização e remove a entrega da lista ativa.
+
+IMPORTANTE PARA BANCO QUE JÁ EXISTE:
+Abra o phpMyAdmin, selecione o banco obralog e execute UMA VEZ o arquivo:
+
+database/atualizacao-finalizar-entrega.sql
+
+Se você criar o banco do zero usando database/obralog.sql, não precisa executar a atualização separada.
