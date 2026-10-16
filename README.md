@@ -1,5 +1,17 @@
 # ObraLog
 
+<p align="center">
+ <img width="1218" height="532" alt="image" src="https://github.com/user-attachments/assets/9f8e61d9-dcd2-47ba-98d9-f0a85911d1b3" />
+
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/PHP-8-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP">
+  <img src="https://img.shields.io/badge/MySQL-MariaDB-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="SQL (MySQL/MariaDB)">
+  <img src="https://img.shields.io/badge/Google%20Maps-Rotas-4285F4?style=for-the-badge&logo=googlemaps&logoColor=white" alt="Google Maps">
+  <img src="https://img.shields.io/badge/PDF-FPDF-EC1C24?style=for-the-badge&logo=adobeacrobatreader&logoColor=white" alt="PDF (FPDF)">
+</p>
+
 Sistema web para gerenciar **entregas de materiais de construção**: lojas publicam cargas, motoristas aceitam e executam as entregas, e a loja acompanha o andamento em tempo quase real.
 
 ## Funcionalidades
@@ -32,10 +44,13 @@ Gerar ou abrir o PDF **não** altera o status. Para finalizar, a entrega precisa
 
 ## Tecnologias
 
-- PHP 8 (sem framework) com PDO e *prepared statements*
-- MySQL / MariaDB
-- HTML, CSS e JavaScript puro (sem bibliotecas)
-- [FPDF](http://www.fpdf.org/) para gerar os PDFs
+| | Tecnologia | Uso |
+|---|---|---|
+| <img src="https://cdn.simpleicons.org/php/777BB4" width="20"> | **PHP 8** | Backend sem framework, com PDO e *prepared statements* |
+| <img src="https://cdn.simpleicons.org/mysql/4479A1" width="20"> | **SQL (MySQL / MariaDB)** | Banco de dados |
+| <img src="https://cdn.simpleicons.org/googlemaps/4285F4" width="20"> | **Google Maps** | Botão de rota até o endereço da entrega |
+| <img src="https://cdn.simpleicons.org/adobeacrobatreader/EC1C24" width="20"> | **PDF ([FPDF](http://www.fpdf.org/))** | Comprovante da entrega |
+| <img src="https://cdn.simpleicons.org/javascript/F7DF1E" width="20"> | **HTML, CSS e JavaScript** | Interface, sem bibliotecas |
 - Ambiente de desenvolvimento: XAMPP
 
 ## Estrutura
